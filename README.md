@@ -1,0 +1,1 @@
+* [Ссылка на макет Figma](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=1-11735&mode=design&t=21aLT7A6vJAjQ7X1-0)

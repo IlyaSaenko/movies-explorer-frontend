@@ -1,0 +1,156 @@
+/* .search {
+  padding: 70px 70px 0;
+}
+
+.search__line {
+  border-bottom: 1px solid rgba(170, 170, 170, 0.2);
+  margin-top: 44px;
+}
+
+.search__form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border:  1.5px solid rgba(170, 170, 170, 0.2);
+  border-radius: 8px;
+  height: 72px;
+  padding: 0 10px 0 25px;
+  margin-bottom: 26px;
+}
+
+.search__input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.search__button {
+  background-color: #FF6838;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FFFFFF;
+  padding: 17px 20px;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.search__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    padding: 70px 30px 0;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .search {
+    padding: 70px 14px 0;
+  }
+
+  .search__form {
+    margin-bottom: 30px;
+  }
+} */
+
+
+
+.searchform__container {
+  width: 100%;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.searchform__form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FDFDFD;
+  border-radius: 9px;
+  width: 100%;
+}
+
+.searchform__form:focus-within {
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+}
+
+.searchform__input-block {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(32, 32, 32, 1);
+}
+
+.searchform__input {
+  background-color: transparent;
+  background-size: 13px 17px;
+  background-repeat: no-repeat;
+  background-position: 30px 50%;
+  border: none;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size:28px;
+  line-height: 34px;
+  font-weight: 500;
+  color: #A0A0A0;
+  text-align: start;
+}
+
+.searchform__input:focus {
+  outline: none;
+}
+
+.searchform__button {
+  margin: 16px 0;
+  width: 34px;
+  height: 34px;
+  border: none;
+  padding: 0;
+  border-radius: 48px;
+  background-image: url("../../images/search-movies-blue.svg");
+  background-repeat: no-repeat;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+}
+
+.searchform__button:hover {
+  opacity: 80%;
+}
+
+@media screen and (max-width: 900px) {
+  .searchform__container {
+    padding: 0 0 109px 0;
+  }
+
+  .searchform__input {
+    width: calc(100% - 160px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .searchform__form {
+    flex-direction: column;
+    position: relative;
+  }
+
+  .searchform__input-block {
+    width: 100%;
+  }
+
+  .searchform__input {
+    padding: 0 0 0 19px;
+    font-size: 14px;
+    width: calc(100% - 118px);
+    width: 100%;
+    background-position: -20px 50%;
+  }
+}
