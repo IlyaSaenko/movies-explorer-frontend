@@ -1,11 +1,11 @@
-.movies__saveddevider {
-  height: 227px;
+.movies__line-area {
   width: 100%;
+  height: 227px;
   margin: 0;
 }
 
 @media screen and (max-width: 980px) {
-  .movies__saveddevider {
+  .movies__line-area {
     height: 130px;
   }
 }

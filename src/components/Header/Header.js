@@ -7,7 +7,7 @@ function Header({ loggedIn, headerClass, onMenuPopup }) {
   return (
     <header className={headerClass}>
       <Link className="header__logo-link" to="/">
-        <img className="header__logo" src={headerLogo} alt="Логотип"/>
+        <img className="header__logo" src={headerLogo} alt="Лого"/>
       </Link>
       {loggedIn ? (
         <div className="header__navigation">

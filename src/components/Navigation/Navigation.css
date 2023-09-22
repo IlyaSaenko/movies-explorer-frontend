@@ -1,173 +1,43 @@
-/* .navigation {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
-.navigation a {
-  transition: 0.3s ease;
-}
-
-.navigation a:hover {
-  opacity: 0.7;
-}
-
-.navigation__movies {
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-.navigation__movies a {
-  color: #000000;
-}
-
-.navigation__movies_white a {
-  color: #FFFFFF;
-}
-
-.navigation__movies-link {
-  font-weight: 400;
-  text-decoration: none;
-  margin-right: 16px;
-}
-
-.navigation__movies-link:last-of-type {
-  margin-right: 0;
-}
-
-.navigation__movies-link_active {
-  font-weight: 500;
-  text-decoration: none;
-  margin-right: 16px;
-}
-
-.navigation__auth {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  width: 100%;
-}
-
-.navigation__link {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  text-decoration: none;
-  color: #FFFFFF;
-  margin-right: 30px;
-}
-
-.navigation__button {
-  padding: 8px 20px;
-  background-color: #2BE080;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.navigation__button:hover {
-  opacity: 0.8;
-}
-
-.navigation__button_account {
-  padding: 8px 20px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  color: #000000;
-  border: none;
-  border-radius: 20px;
-  background-color: #F9F9F9;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.navigation__button_account:hover {
-  opacity: 0.8;
-}
-
-.burger__button {
-  background: none;
-  background-image: url('../../images/burger.svg');
-  width: 44px;
-  height: 44px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease;
-  display: none;
-}
-
-/* .burger__button_white {
-  background-image: url('../../images/burger-menu-white.svg');
-} */
-
-/* @media screen and (max-width: 768px) {
-  .navigation__movies,
-  .navigation__button_account {
-    display: none;
-  }
-
-  .burger__button {
-    display: block;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .navigation__link {
-    margin-right: 14px;
-  }
-} */
-
-
-
 .navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: calc(100%/2 + 124px);
   margin: 0;
   padding: 0;
   padding-left: 30px;
-  width: calc(100%/2 + 124px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navigation__links {
+  height: 32px;
   display: flex;
   list-style-type: none;
-  height: 32px;
   border-radius: 40px;
 }
 
 .navigation__link {
   text-decoration: none;
-  color: #ffffff;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 13px;
   line-height: 18px;
-  font-style: normal;
   font-weight: 400;
   transition: opacity 0.35s linear;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .navigation__link:hover {
   opacity: 80%;
 }
 
-.navigation__links_account {
+.navigation__links-account {
   display: flex;
 }
 
 .navigation__account-button {
   width: 90px;
-  display: flex;
   padding: 0;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -178,14 +48,14 @@
 }
 
 .navigation__account-logo {
-  border: none;
-  border-radius: 50%;
   width: 26px;
   height: 26px;
   padding: 6px 0;
-  background-color: rgba(103, 104, 104, 0.5);
+  border: none;
+  border-radius: 50%;
   transition: opacity 0.35s linear;
   cursor: pointer;
+  background-color: rgba(103, 104, 104, 0.5);
 }
 
 .navigation__account-logo:hover {
@@ -193,8 +63,8 @@
 }
 
 .navigation__link-movies {
-  font-weight: 500;
   padding: 0 16px 0 0;
+  font-weight: 500;
 }
 
 .navigation__account-burger {
@@ -203,11 +73,11 @@
 
 @media screen and (max-width: 768px) {
   .navigation__account-burger {
-    display: block;
     width: 44px;
     height: 44px;
+    /* margin: 4px 0 0 0; */
     padding: 0;
-    margin: 4px 0 0 0;
+    display: block;
     border: 0;
     background-image: url(../../images/menu.svg);
     background-color: transparent;
@@ -226,8 +96,8 @@
 
 @media screen and (max-width: 520px) {
   .navigation__account-burger {
-    width: 22px;
-    height: 21px;
+    width: 30px;
+    height: 40px;
     background-size: cover;
   }
 }

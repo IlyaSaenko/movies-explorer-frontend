@@ -1,130 +1,9 @@
-/* .card {
-  width: 360px;
-  position: relative;
-}
-
-.card__image {
-  width: 360px;
-  height: 201px;
-  border-radius: 6px;
-}
-
-.card__description {
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 18px 0;
-}
-
-.card__name {
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 16px;
-  color: #000000;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.card__duration {
-  display: block;
-  border-radius: 3px;
-  background-color: #F9F9F9;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 10px;
-  color: #A0A0A0;
-  padding: 3px 4px;
-}
-
-.card__button {
-  position: absolute;
-  top: 14px;
-  right: 10px;
-  background-color: #F9F9F9;
-  border: none;
-  border-radius: 30px;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 9px;
-  padding: 6px 7px;
-  cursor: pointer;
-  visibility: hidden;
-}
-
-.card:hover .card__button {
-  visibility: visible;
-}
-
-.card__button_saved {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background-image: url('../../images/save-passive.svg');
-  width: 21px;
-  height: 21px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-}
-
-.card__button_delete {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 21px;
-  height: 21px;
-  background-image: url('../../images/x.svg');
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  display: block;
-  visibility: hidden;
-}
-
-.card:hover .card__button_delete {
-  visibility: visible;
-}
-
-@media screen and (max-width: 768px) {
-  .card {
-    width: 339px;
-  }
-
-  .card__image {
-    width: 339px;
-    height: 190px;
-  }
-
-  .card__description {
-    padding: 25px 0 0;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .card {
-    width: 300px;
-  }
-
-  .card__image {
-    width: 300px;
-    height: 168px;
-  }
-
-  .card__description {
-    padding: 16px 0 0;
-  }
-
-  .card__name {
-    font-size: 12px;
-    line-height: 15px;
-  }
-} */
-
-.movies__card {
+.movie {
+  width: 270px;
+  height: 218px;
   display: flex;
   flex-direction: column;
-  max-width: 270px;
-  height: 218px;
+  /* max-width: 270px; */
   border-radius: 10px;
   border: none;
   overflow: hidden;
@@ -133,23 +12,24 @@
   background-color: rgba(34, 34, 34, 1);
 }
 
-.movies__card:focus {
+.movie:focus {
   outline: none;
 }
 
-.movies__card:focus-within {
+.movie:focus-within {
   box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
 }
 
 .movie__image {
-  max-width: 270px;
+  width: 270px;
   height: 151px;
+  object-fit: cover;
 }
 
 .movie__info {
+  width: 272px;
   display: flex;
   justify-content: space-between;
-  width: 272px;
 }
 
 .movie__figcaption {
@@ -171,30 +51,60 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 11px;
   line-height: 13px;
-  font-style: normal;
   font-weight: 400;
   color: #A0A0A0;
 }
 
 .movie__like-button {
-  padding: 0;
-  margin: 16px 24px 0 0;
-  height: 12px;
   width: 14px;
+  height: 12px;
+  margin: 16px 24px 0 0;
+  padding: 0;
   border: none;
-  background-color: transparent;
   transition: opacity 0.35s linear;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .movie__like-button:hover {
   opacity: 80%;
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1279px) {
+  .movie {
+    width: 270px;
+    height: 235px;
+  }
+
   .movie__image {
-    height: 190px;
+    width: 100%;
+    height: 151px;
+    object-fit: cover;
+  }
+  
+  .movie__info {
+    width: calc(100% - 32px);
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 980px) {
+
+  .movie {
     width: 339px;
+    height: 257px;
+  }
+
+  .movie__info {
+    width: 339px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .movie__image {
+    width: 339px;
+    height: 190px;
   }
 
   .movie__figcaption {
@@ -202,18 +112,38 @@
   }
 
   .movie__like-button {
-    margin: 15px 22px 0 0;
+    margin: 10px 20px 0 0;
   }
 
   .movie__duration {
-    margin: 15px 0 0 0;
+    margin: 8px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .movie {
+    width: 300px;
+    height: 235px;
   }
 }
 
 @media screen and (max-width: 680px) {
-  .movie__image {
-    height: 168px;
+
+  .movie {
     width: 300px;
+    height: 235px;
+  }
+
+  .movie__info {
+    width: 339px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .movie__image {
+    width: 300px;
+    height: 168px;
   }
 
   .movie__title {
@@ -228,6 +158,6 @@
   }
 
   .movie__like-button {
-    margin: 14px 18px 0 0;
+    margin: 14px 58px 0 0;
   }
 }
