@@ -5,14 +5,14 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function Movies({ movies, isOwner }) {
   return (
-    <div className="movies">
+    <main className="movies">
       <SearchForm />
       <FilterCheckbox />
       <MoviesCardList
         movies={movies}
         isOwner={isOwner}
       />
-    </div>
+    </main>
   );
 }
 

@@ -2,9 +2,9 @@ import React from 'react';
 
 function SearchForm() {
   return (
-    <section className="searchform" aria-label="Форма поиска">
+    <section className="searchform" aria-label="Форма поиска фильма">
       <form className="searchform__form" noValidate>
-        <div className="searchform__input-block">
+        <label className="searchform__input-block">
           <input
             className="searchform__input"
             type="text"
@@ -12,9 +12,9 @@ function SearchForm() {
             required
             minLength="2"
           />
-          <button className="searchform__button" />
+          <button className="searchform__button" type="button"/>
           <span className="searchform__input-error"></span>
-        </div>
+        </label>
       </form>
     </section>
   );

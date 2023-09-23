@@ -4,11 +4,11 @@ import headerLogo from '../../images/log-c.svg';
 
 function Login() {
   return (
-    <div className="register__container">
-      <section className="register__section" aria-label="Секция регистрации">
+    <main className="register login">
+      <div className="register__section" aria-label="Секция регистрации">
         <>
           <Link className="register__logo-link" to="/">
-            <img className="register__logo" src={headerLogo} alt="Логотип"/>
+            <img className="register__logo" src={headerLogo} alt="Лого"/>
           </Link>
           <h2 className="register__title">Рады видеть!</h2>
         </>
@@ -21,20 +21,20 @@ function Login() {
             </label>
             <label className="register__label">
               <p className="register__placeholder">Пароль</p>
-              <input className="login__input login__input-password" type="password" placeholder="" required />
+              <input className="login__input login__input-password" type="password" placeholder="" required minLength="8"/>
               <span className="login__input-error">Что-то пошло не так...</span>
             </label>
           </fieldset>
           <div className="login__buttons-block">
-            <button  className="register__submit-button" type="submit" name="submit-button" >Войти</button>
+            <button className="register__submit-button" type="submit" name="submit-button" >Войти</button>
             <div className="register__link-block">
               <p className="register__link register__link-text">Ещё не зарегистрированы?</p>
               <Link className="register__link" to="/signup">Регистрация</Link>
             </div>
           </div>
         </form>
-      </section>
-    </div>
+      </div>
+    </main>
   );
 }
 

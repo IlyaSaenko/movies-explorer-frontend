@@ -58,7 +58,7 @@
 .movie__like-button {
   width: 14px;
   height: 12px;
-  margin: 16px 24px 0 0;
+  margin: 12px 24px 0 0;
   padding: 0;
   border: none;
   transition: opacity 0.35s linear;
@@ -83,7 +83,6 @@
   }
   
   .movie__info {
-    width: calc(100% - 32px);
     display: flex;
     justify-content: space-between;
   }

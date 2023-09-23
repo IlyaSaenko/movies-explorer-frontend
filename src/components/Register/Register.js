@@ -4,13 +4,13 @@ import headerLogo from '../../images/log-c.svg';
 
 function Register() {
   return (
-    <div className="register">
-      <section className="register__section" aria-label="Секция регистрации">
+    <main className="register">
+      <div className="register__section" aria-label="Секция регистрации">
         <>
           <Link className="register__logo-link" to="/">
-            <img className="register__logo" src={headerLogo} alt="Логотип"/>
+            <img className="register__logo" src={headerLogo} alt="Лого"/>
           </Link>
-          <h2 className="register__title">Добро пожаловать!</h2>
+          <h1 className="register__title">Добро пожаловать!</h1>
         </>
         <form className="register__form">
           <fieldset className="register__inputs-block">
@@ -26,20 +26,20 @@ function Register() {
             </label>
             <label className="register__label">
               <p className="register__placeholder">Пароль</p>
-              <input className="register__input register__input-password" type="password" placeholder="" required />
+              <input className="register__input register__input-password" type="password" placeholder="" required minLength="8"/>
               <span className="register__input-error">Что-то пошло не так...</span>
             </label>
           </fieldset>
           <div className="register__buttons-block">
-            <button  className="register__submit-button" type="submit" name="submit-button">Зарегистрироваться</button>
+            <button className="register__submit-button" type="submit" name="submit-button">Зарегистрироваться</button>
             <div className="register__link-block">
               <p className="register__link register__link-text">Уже зарегистрированы?</p>
               <Link className="register__link" to="/signin">Войти</Link>
             </div>
           </div>
         </form>
-      </section>
-    </div>
+      </div>
+    </main>
   );
 }
 

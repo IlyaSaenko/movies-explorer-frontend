@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Profile() {
   return (
-    <form className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
+    <main className="profile">
+      <h1 className="profile__title">Привет, Виталий!</h1>
       <fieldset className="profile__inputs-block">
         <label className="profile__label">
           <p className="profile__placeholder">Имя</p>
@@ -18,10 +18,10 @@ function Profile() {
       <div className="profile__buttons-block">
         <button className="profile__edit-button" type="submit">Редактировать</button>
         <Link to="/">
-          <button className="profile__signout-button">Выйти из аккаунта</button>
+          <button className="profile__signout-button" type="submit">Выйти из аккаунта</button>
         </Link>
       </div>
-    </form>
+    </main>
   );
 }
 

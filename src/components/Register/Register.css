@@ -1,9 +1,9 @@
 .register {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #FFFFFF;
-  height: 100vh;
 }
 
 .register__section {
@@ -31,7 +31,7 @@
   padding: 0 ;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 24px;
-  line-height: 29px;
+  line-height: 30px;
   font-weight: 500;
 }
 
@@ -102,8 +102,16 @@
   line-height: 17px;
   font-weight: 500;
   transition: opacity .35s linear;
+  cursor: pointer;
   background-color: rgba(66, 133, 244, 1);
   color: #FFFFFF;
+}
+
+.register__submit-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: ease-out .35s;
+  background-color: rgba(52, 86, 243, 1);
 }
 
 .register__link-block {
@@ -114,15 +122,20 @@
 
 .register__link {
   margin: 0;
-  padding: 0 0 80px;
+  /* padding: 0 0 80px; */
   cursor: pointer;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 400;
+  cursor: pointer;
   transition: opacity .35s linear;
   text-decoration: none;
   color: rgba(66, 133, 244, 1);
+}
+
+.register__link:hover {
+  opacity: 80%;
 }
 
 .register__link-text {

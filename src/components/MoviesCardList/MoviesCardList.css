@@ -2,7 +2,7 @@
   margin: 80px auto 10px auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px 24px;
+  gap: 32px 20px;
   color: rgb(255, 255, 255);
 }
 

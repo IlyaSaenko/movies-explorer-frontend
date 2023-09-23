@@ -5,7 +5,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SavedMovies({movies, isOwner}) {
   return (
-    <div className="movies">
+    <main className="movies saved-movies">
       <SearchForm />
       <FilterCheckbox />
       <MoviesCardList
@@ -17,7 +17,7 @@ function SavedMovies({movies, isOwner}) {
           <section className="movies__line-area" aria-label="Область, разделяющая фильмы и футер" />
         )
       }
-    </div>
+    </main>
   );
 }
 

@@ -1,19 +1,19 @@
-import movie1 from '../images/film-pic3.svg';
-import movie2 from '../images/film-pic3.svg';
-import movie3 from '../images/film-pic3.svg';
-import movie4 from '../images/film-pic3.svg';
-import movie5 from '../images/film-pic3.svg';
-import movie6 from '../images/film-pic3.svg';
-import movie7 from '../images/film-pic3.svg';
-import movie8 from '../images/film-pic3.svg';
-// import movie9 from '../images/film-pic3.svg';
-// import movie10 from '../images/film-pic3.svg';
-// import movie11 from '../images/film-pic3.svg';
-// import movie12 from '../images/film-pic3.svg';
-// import movie13 from '../images/film-pic3.svg';
-// import movie14 from '../images/film-pic3.svg';
-// import movie15 from '../images/film-pic3.svg';
-// import movie16 from '../images/film-pic3.svg';
+import movie1 from '../images/film-pic3.png';
+import movie2 from '../images/film-pic3.png';
+import movie3 from '../images/film-pic3.png';
+import movie4 from '../images/film-pic3.png';
+import movie5 from '../images/film-pic3.png';
+import movie6 from '../images/film-pic3.png';
+import movie7 from '../images/film-pic3.png';
+import movie8 from '../images/film-pic3.png';
+// import movie9 from '../images/film-pic3.png';
+// import movie10 from '../images/film-pic3.png';
+// import movie11 from '../images/film-pic3.png';
+// import movie12 from '../images/film-pic3.png';
+// import movie13 from '../images/film-pic3.png';
+// import movie14 from '../images/film-pic3.png';
+// import movie15 from '../images/film-pic3.png';
+// import movie16 from '../images/film-pic3.png';
 
 const moviesArray = [
   {

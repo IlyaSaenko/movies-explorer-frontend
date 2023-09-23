@@ -40,13 +40,12 @@
 
 .menu__link-button {
   padding: 28px 0 0 0;
-  background-color: transparent;
   border: none;
   list-style-type: none;
+  background-color: transparent;
 }
 
 .menu__link {
-  color: #ffffff;
   text-decoration: none;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 18px;
@@ -54,9 +53,19 @@
   font-weight: 500;
   transition: opacity 0.35s linear;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .menu__link:hover {
+  opacity: 80%;
+}
+
+.menu__link-text {
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+}
+
+.menu__link-text:hover {
   opacity: 80%;
 }
 
@@ -66,7 +75,7 @@
 }
 
 .menu__account {
-  margin-top: auto;
+  margin-top: 620px;
   margin-bottom: 47px;
   padding: 0;
   display: flex;
@@ -85,7 +94,13 @@
   line-height: 16px;
   font-weight: 500;
   text-decoration: none;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
   color: #ffffff;
+}
+
+.menu__account-button:hover {
+  opacity: 80%;
 }
 
 .menu__account-logo {
@@ -125,11 +140,15 @@
 @media screen and (max-width: 320px) {
   .menu__close-button {
     top: 12px;
-    right: 22px;
+    right: 14px;
   }
 
   .menu__links {
     margin: 120px 0 0 0;
+  }
+
+  .menu__link {
+    margin-left: 20px;
   }
 
   .menu__link-button {
@@ -142,5 +161,9 @@
 
   .menu__account {
     margin-top: 444px;
+  }
+
+  .menu__account-button {
+    margin-left: 20px;
   }
 }

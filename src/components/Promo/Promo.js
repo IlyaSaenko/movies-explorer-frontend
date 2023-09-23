@@ -1,5 +1,5 @@
 import React from 'react';
-import promologo from '../../../src/images/landing-logo-sphera.svg';
+import promologo from '../../../src/images/landing-logo-sphera.png';
 
 
 function Promo() {

@@ -30,6 +30,7 @@
   border-radius: 20px;
   background-color: #ccc;
   transition: 0.4s;
+  cursor: pointer;
 }
 
 .checkbox__slider:before {
@@ -58,7 +59,6 @@
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 18px;
   color: #ffffff;
 }
 
@@ -66,7 +66,14 @@
   .checkbox {
     padding-top: 30px;
     padding-bottom: 68px;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+  }
+
+  .checkbox__text {
+    margin-right: 15px;
+    font-size: 13px;
+    line-height: 18px;
   }
 }
 
@@ -77,12 +84,10 @@
     padding-top: 40px;
     padding-bottom: 40px;
     justify-content: center;
-    flex-direction: row-reverse;
   }
 
   .checkbox__text {
     margin-right: 10px;
     font-size: 11px;
-    line-height: 18px;
   }
 }

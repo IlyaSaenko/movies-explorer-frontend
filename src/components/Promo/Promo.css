@@ -40,11 +40,11 @@
 
 @media screen and (max-width: 768px) {
   .promo__logo {
-    padding: 65px 0 48px;
+    padding: 80px 0 48px;
   }
 
   .promo {
-    padding: 75px 70px 92px;
+    padding: 77px 70px 92px;
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -68,7 +68,7 @@
 
 @media screen and (max-width: 470px) {
   .promo {
-    padding: 70px 10px 80px;
+    padding: 87px 10px 80px;
   }
 
   .promo__logo {

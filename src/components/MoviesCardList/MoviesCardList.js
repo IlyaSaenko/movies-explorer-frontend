@@ -5,7 +5,7 @@ function MoviesCardList({movies, isOwner}) {
 
   return (
     <>
-      <section className="movies__section" aria-label="Секция с карточками">
+      <ul className="movies__section" aria-label="Секция с карточками">
         {
           movies?.map((movie) => {
             return (
@@ -16,11 +16,11 @@ function MoviesCardList({movies, isOwner}) {
             )
           }
         )}
-      </section>
+      </ul>
       {
         (!isOwner &&
           <section className="movies__section-more" aria-label="Кнопка Ещё">
-             <button className="movies__more-button">Ещё</button>
+             <button className="movies__more-button" type="button">Ещё</button>
           </section>
         )
       }

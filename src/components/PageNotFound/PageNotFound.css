@@ -19,6 +19,7 @@
   font-size: 140px;
   line-height: 169px;
   font-weight: 400;
+  color: #ffffff;
 }
 
 .notfound__subtitle {
@@ -27,6 +28,7 @@
   font-size: 16px;
   line-height: 19px;
   font-weight: 400;
+  color: #ffffff;
 }
 
 .notfound__link {
@@ -37,7 +39,7 @@
   text-decoration: none;
   transition: opacity 0.35s linear;
   cursor: pointer;
-  color: #000000;
+  color: rgba(66, 133, 244, 1);
 }
 
 .notfound__link:hover {
@@ -53,6 +55,7 @@
 @media screen and (max-width: 440px) {
   .notfound__text-block {
     margin: 329px 0 284px 0;
+    width: 100%;
   }
 
   .notfound__title {

@@ -16,12 +16,12 @@ function Header({ loggedIn, headerClass, onMenuPopup }) {
           />
         </div>
       ) : (
-        <div className="header__button-block">
+        <nav className="header__button-block">
           <>
             <Link className="header__link" to="/signup">Регистрация</Link>
             <Link className="header__button" to="/signin">Войти</Link>
           </>
-        </div>
+        </nav>
       )}
     </header>
   );

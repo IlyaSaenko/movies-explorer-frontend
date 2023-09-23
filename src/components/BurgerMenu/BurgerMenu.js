@@ -4,7 +4,7 @@ import  accountLogo from '../../images/logo-slime.svg';
 
 function BurgerMenu({ isOpen, onClose, onOverlayClick }) {
   return (
-    <div className={`menu  ${isOpen ? 'menu_is-opened' : ''}`} onClick={onOverlayClick} >
+    <section className={`menu  ${isOpen ? 'menu_is-opened' : ''}`} onClick={onOverlayClick} >
       <nav className="menu__container">
         <button className="menu__close-button" type="button" onClick={onClose} />
         <ul className="menu__links">
@@ -24,7 +24,7 @@ function BurgerMenu({ isOpen, onClose, onOverlayClick }) {
           </Link>
         </div>
       </nav>
-    </div>
+    </section>
   );
 }
 

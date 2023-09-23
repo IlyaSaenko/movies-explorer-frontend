@@ -3,7 +3,7 @@ import likeButton from '../../../src/images/save-visible.svg';
 
 function MoviesCard({movie}) {
   return (
-    <article className="movie">
+    <li className="movie">
       <img className="movie__image" src={movie.image} alt={movie.nameRU} />
       <div className="movie__info">
         <figcaption className="movie__figcaption">
@@ -14,7 +14,7 @@ function MoviesCard({movie}) {
           <img className="movie__like-image" src={likeButton} alt="Лого лайка"></img>
         </button>
       </div>
-    </article>
+    </li>
   );
 }
 

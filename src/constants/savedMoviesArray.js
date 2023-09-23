@@ -1,6 +1,6 @@
-import movie1 from '../images/film-pic3.svg';
-import movie2 from '../images/film-pic3.svg';
-import movie3 from '../images/film-pic3.svg';
+import movie1 from '../images/film-pic3.png';
+import movie2 from '../images/film-pic3.png';
+import movie3 from '../images/film-pic3.png';
 
 export const savedMoviesArray = [
   {
@@ -20,6 +20,6 @@ export const savedMoviesArray = [
     image: movie3,
     nameRU: '33 слова о дизайне',
     duration: '1ч 42м'
-  },
+  }
 ];
 
