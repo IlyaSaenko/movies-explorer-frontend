@@ -55,10 +55,13 @@
   overflow: hidden;
   background-color: transparent;
   color: #ffffff;
+  outline: 0;
+
 }
 
 .profile__input:focus {
-  outline: none;
+  outline: 1px solid #303131;
+
 }
 
 .profile__buttons-block {

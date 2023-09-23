@@ -1,7 +1,6 @@
 import React from 'react';
 import promologo from '../../../src/images/landing-logo-sphera.png';
 
-
 function Promo() {
   return (
     <section className="promo" aria-label="Заголовок О проекте">
@@ -9,7 +8,7 @@ function Promo() {
         <h1 className="promo__header">Учебный проект студента факультета Веб-разработки.</h1>
         <p className="promo__text">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
       </div>
-      <img className="promo__logo" src={promologo} alt="Логотип-Промо"/>
+      <img className="promo__logo" src={promologo} alt="Лого Промо"/>
     </section>
   );
 }

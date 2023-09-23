@@ -7,13 +7,14 @@
   line-height: 16px;
   border: none;
   border-radius: 8px;
-  color: #ffffff;
   background-color: rgba(47, 47, 47, 1);
-  color: #000000;
+  outline: none;
+  color: #ffffff;
 }
 
 .login__input:focus {
-  outline: none;
+	outline: 1px solid #4285F4;
+
 }
 
 .login__input-error {

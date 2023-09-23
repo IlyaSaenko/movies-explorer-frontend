@@ -3,6 +3,7 @@
   padding-bottom: 36px;
   display: flex;
   justify-content: flex-start;
+  cursor: pointer;
   background-color: rgba(32, 32, 32, 1);
 }
 

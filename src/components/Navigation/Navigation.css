@@ -1,4 +1,4 @@
-.navigation {
+/* .navigation {
   width: calc(100%/2 + 124px);
   margin: 0;
   padding: 0;
@@ -51,6 +51,107 @@
   width: 26px;
   height: 26px;
   padding: 6px 0;
+  border: none;
+  border-radius: 50%;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+  background-color: rgba(103, 104, 104, 0.5);
+}
+
+.navigation__account-logo:hover {
+  opacity: 80%;
+}
+
+.navigation__link-movies {
+  padding: 0 16px 0 0;
+  font-weight: 500;
+}
+
+.navigation__account-burger {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__account-burger {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: block;
+    border: 0;
+    background-image: url(../../images/menu.svg);
+    background-color: transparent;
+    transition: opacity 0.35s linear;
+    cursor: pointer;
+  }
+
+  .navigation__account-burger:hover {
+    opacity: 80%;
+  }
+
+  .navigation__link {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .navigation__account-burger {
+    width: 30px;
+    height: 40px;
+    background-size: cover;
+  }
+} */
+
+.navigation {
+  width: calc(100%/2 + 124px);
+  margin: 0;
+  padding: 0;
+  padding-left: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__links {
+  height: 32px;
+  display: flex;
+  list-style-type: none;
+  border-radius: 40px;
+}
+
+.navigation__link {
+  text-decoration: none;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.navigation__link:hover {
+  opacity: 80%;
+}
+
+.navigation__links-account {
+  display: flex;
+}
+
+.navigation__account-button {
+  width: 90px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  background-color: transparent;
+}
+
+.navigation__account-logo {
+  padding: 8px 8px;
   border: none;
   border-radius: 50%;
   transition: opacity 0.35s linear;

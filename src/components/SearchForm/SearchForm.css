@@ -39,10 +39,12 @@
   text-align: start;
   background-color: transparent;
   color: #A0A0A0;
+  outline: 0;
+
 }
 
 .searchform__input:focus {
-  outline: none;
+  outline: 1px solid #303131;
 }
 
 .searchform__button {

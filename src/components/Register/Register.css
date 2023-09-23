@@ -69,7 +69,7 @@
 }
 
 .register__input:focus {
-  outline: none;
+	outline: 1px solid #4285F4;
 }
 
 .register__buttons-block {
@@ -84,7 +84,6 @@
   line-height: 12px;
   font-weight: 400;
   color: #FF4062;
-  /* display: none; */
 }
 
 .register__buttons-block {
@@ -122,7 +121,6 @@
 
 .register__link {
   margin: 0;
-  /* padding: 0 0 80px; */
   cursor: pointer;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 14px;
@@ -149,7 +147,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 450px) {
   .register__section {
     width: calc(100% - 60px);
     margin: 56px 0 0 0;

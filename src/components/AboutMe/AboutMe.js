@@ -18,7 +18,8 @@ const AboutMe = () => {
           </p>
           <a className="about-me__link" href="https://github.com/IlyaSaenko" target="_blank" rel="noreferrer">Github</a>
         </div>
-        <img className="about-me__photo" src={photo} alt="Я на фотографии"/>
+        <img className="about-me__photo" src={photo}
+              alt="На фотографии автор проекта, Илья Саенко. В кожаной куртке с проницательным взглядом"/>
       </div>
     </section>
   );

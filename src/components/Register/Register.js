@@ -21,7 +21,7 @@ function Register() {
             </label>
             <label className="register__label">
               <p className="register__placeholder">E-mail</p>
-              <input className="register__input register__input-email" type="email" placeholder="email@yandex.ru" required minLength="2"/>
+              <input className="register__input register__input-email" type="email" placeholder="email@yandex.ru" required minLength="6"/>
               <span className="register__input-error"></span>
             </label>
             <label className="register__label">
@@ -31,7 +31,7 @@ function Register() {
             </label>
           </fieldset>
           <div className="register__buttons-block">
-            <button className="register__submit-button" type="submit" name="submit-button">Зарегистрироваться</button>
+            <button className="register__submit-button" type="button" name="submit-button">Зарегистрироваться</button>
             <div className="register__link-block">
               <p className="register__link register__link-text">Уже зарегистрированы?</p>
               <Link className="register__link" to="/signin">Войти</Link>
