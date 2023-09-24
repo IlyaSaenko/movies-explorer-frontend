@@ -8,7 +8,7 @@ function Register() {
       <div className="register__section" aria-label="Секция регистрации">
         <>
           <Link className="register__logo-link" to="/">
-            <img className="register__logo" src={headerLogo} alt="Лого"/>
+            <img className="register__logo" src={headerLogo} alt="Лого" />
           </Link>
           <h1 className="register__title">Добро пожаловать!</h1>
         </>
@@ -16,17 +16,28 @@ function Register() {
           <fieldset className="register__inputs-block">
             <label className="register__label">
               <p className="register__placeholder">Имя</p>
-              <input className="register__input register__input-name" type="text" placeholder="Виталий" required minLength="2"/>
+              <input className="register__input register__input-name"
+                type="text"
+                placeholder="Виталий"
+                required
+                minLength="2"
+                maxLength="30"
+              />
               <span className="register__input-error"></span>
             </label>
             <label className="register__label">
               <p className="register__placeholder">E-mail</p>
-              <input className="register__input register__input-email" type="email" placeholder="email@yandex.ru" required minLength="6"/>
+              <input className="register__input register__input-email"
+                type="email"
+                placeholder="email@yandex.ru"
+                required
+                minLength="6"
+              />
               <span className="register__input-error"></span>
             </label>
             <label className="register__label">
               <p className="register__placeholder">Пароль</p>
-              <input className="register__input register__input-password" type="password" placeholder="" required minLength="8"/>
+              <input className="register__input register__input-password" type="password" placeholder="" required minLength="8" />
               <span className="register__input-error">Что-то пошло не так...</span>
             </label>
           </fieldset>

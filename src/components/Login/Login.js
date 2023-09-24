@@ -8,7 +8,7 @@ function Login() {
       <section className="register__section" aria-label="Секция регистрации">
         <>
           <Link className="register__logo-link" to="/">
-            <img className="register__logo" src={headerLogo} alt="Лого"/>
+            <img className="register__logo" src={headerLogo} alt="Лого" />
           </Link>
           <h1 className="register__title">Рады видеть!</h1>
         </>
@@ -16,12 +16,22 @@ function Login() {
           <fieldset className="register__inputs-block">
             <label className="register__label">
               <p className="register__placeholder">E-mail</p>
-              <input className="login__input login__input-email" type="email" placeholder="email@yandex.ru" required minLength="6"/>
+              <input className="login__input login__input-email"
+                type="email"
+                placeholder="email@yandex.ru"
+                required
+                minLength="6"
+              />
               <span className="login__input-error"></span>
             </label>
             <label className="register__label">
               <p className="register__placeholder">Пароль</p>
-              <input className="login__input login__input-password" type="password" placeholder="" required minLength="8"/>
+              <input className="login__input login__input-password"
+                type="password"
+                placeholder=""
+                required
+                minLength="8"
+              />
               <span className="login__input-error">Что-то пошло не так...</span>
             </label>
           </fieldset>
