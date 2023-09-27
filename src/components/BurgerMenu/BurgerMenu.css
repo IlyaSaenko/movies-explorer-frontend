@@ -1,0 +1,169 @@
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.3);
+  transition: visibility .35s linear, opacity .35s linear;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menu_is-opened {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  z-index: 2;
+}
+
+.menu__container {
+  width: 520px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  background-color: rgba(32, 32, 32, 1);
+}
+
+.menu__links {
+  width: 340px;
+  margin: 131px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu__link-button {
+  padding: 28px 0 0 0;
+  border: none;
+  list-style-type: none;
+  background-color: transparent;
+}
+
+.menu__link {
+  text-decoration: none;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.menu__link:hover {
+  opacity: 80%;
+}
+
+.menu__link-text {
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+}
+
+.menu__link-text:hover {
+  opacity: 80%;
+}
+
+.menu__link-button:nth-child(2) {
+  text-decoration: underline solid #ffffff 2px;
+  text-underline-offset: 9px;
+}
+
+.menu__account {
+  margin-top: 620px;
+  margin-bottom: 47px;
+  padding: 0;
+  display: flex;
+  border: none;
+}
+
+.menu__account-button {
+  width: 90px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.menu__account-button:hover {
+  opacity: 80%;
+}
+
+.menu__account-logo {
+  width: 12px;
+  height: 12px;
+  padding: 8px 7.25px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(103, 104, 104, 0.5);
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+}
+
+.menu__account-logo:hover {
+  opacity: 80%;
+}
+
+.menu__close-button {
+  background-image: url(../../images/logo-close-menu.svg);
+  width: 32px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  position: absolute;
+  top: 22.44px;
+  right: 22.44px;
+  background-color: rgb(0, 0, 0, 0);
+  background-size: cover;
+  transition: opacity 0.35s linear;
+  cursor: pointer;
+}
+
+.menu__close-button:hover {
+  opacity: 60%;
+}
+
+@media screen and (max-width: 320px) {
+  .menu__close-button {
+    top: 12px;
+    right: 14px;
+  }
+
+  .menu__links {
+    margin: 120px 0 0 0;
+  }
+
+  .menu__link {
+    margin-left: 20px;
+  }
+
+  .menu__link-button {
+    padding: 24px 0 0 0;
+  }
+
+  .menu__link-button:nth-child(2) {
+    text-underline-offset: 11px;
+  }
+
+  .menu__account {
+    margin-top: 444px;
+  }
+
+  .menu__account-button {
+    margin-left: 20px;
+  }
+}

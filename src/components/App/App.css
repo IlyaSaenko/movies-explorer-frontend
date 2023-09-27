@@ -1,0 +1,14 @@
+/* .App {
+  height: 100vh;
+} */
+
+.App {
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  background-color: rgba(32, 32, 32, 1);
+  -webkit-font-smooting: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
