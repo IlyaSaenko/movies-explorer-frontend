@@ -61,7 +61,11 @@
 
 .profile__input:focus {
   outline: 1px solid #303131;
+}
 
+.profile__input-error_active {
+  top: 48px;
+  z-index: 2;
 }
 
 .profile__buttons-block {
@@ -70,7 +74,12 @@
   flex-direction: column;
   align-items: center;
   background-color: rgba(32, 32, 32, 1);
+}
 
+.profile__error {
+  width: 410px;
+  position: absolute;
+  top: 174px;
 }
 
 .profile__edit-button {
@@ -90,6 +99,13 @@
 
 .profile__edit-button:hover {
   opacity: 80%;
+}
+
+.profile__edit-button_disabled {
+  opacity: 0.3;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  color: #000000;
 }
 
 .profile__signout-button {

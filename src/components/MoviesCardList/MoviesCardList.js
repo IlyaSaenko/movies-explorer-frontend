@@ -1,26 +1,39 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({movies, isOwner}) {
+function MoviesCardList({ movies, isLoading, onClick, limit, isSavedMovies, onSave, onDelete, savedMovies }) {
 
   return (
     <>
       <ul className="movies__section" aria-label="Секция с карточками">
         {
-          movies?.map((movie) => {
-            return (
-              <MoviesCard
-                movie={movie}
-                key={movie.id}
-              />
-            )
-          }
-        )}
+          isLoading ? <Preloader /> :
+            movies?.map((movie, index, array) => {
+              return (
+                index < limit &&
+                <MoviesCard
+                  isSavedMovies={isSavedMovies}
+                  onSave={onSave}
+                  onDelete={onDelete}
+                  movie={movie}
+                  savedMovies={savedMovies}
+                  key={movie.movieId}
+                />
+              )
+            }
+            )}
       </ul>
       {
-        (!isOwner &&
-          <section className="movies__section-more" aria-label="Кнопка Ещё">
-             <button className="movies__more-button" type="button">Ещё</button>
+        (movies.length > limit) &&
+        (
+          <section className="more-section" aria-label="Секция с кнопкой Ёще">
+            <button
+              className="more-section__button"
+              type="button"
+              onClick={onClick}
+            >Ещё
+            </button>
           </section>
         )
       }
