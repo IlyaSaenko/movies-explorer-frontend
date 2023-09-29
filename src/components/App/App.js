@@ -177,7 +177,7 @@ function App() {
     setIsLoading(true);
     moviesApi.getAllMovies()
       .then((dataForInitialMovies) => {
-        console.log("handleGetAllMovies: " + dataForInitialMovies)
+        console.log("handleGetAllMovies=> isLoading=" + isLoading)
         const transformedmovies = transformMovieHandle(dataForInitialMovies);
         localStorage.setItem('allMovies', JSON.stringify(transformedmovies));
         setInitialMovies(transformedmovies);

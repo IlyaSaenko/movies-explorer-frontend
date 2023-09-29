@@ -6,8 +6,9 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import failImage from '../../images/entry-bad.svg';
 import { MOVIES_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
-import { WIDTH_3_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_3_ADD, MOVIES_2_ADD } from '../../constants/constants';
+import { WIDTH_4_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_4_ADD, MOVIES_2_ADD } from '../../constants/constants';
 import useWindowWidth from '../../utils/WindowWidth';
+import Preloader from '../Preloader/Preloader';
 
 function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +36,8 @@ function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
 
   async function searchMoviesHandler() {
     setIsLoading(true);
-    setFoundMovies([]);
+    console.log("searchMoviesHandler => isLoading=" + isLoading);
+    // setFoundMovies([]);
     try {
       if (searchRequest.length > 0) {
         const moviesToRender = await handleSearch(initialMovies, searchRequest);
@@ -49,7 +51,7 @@ function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
           setRequestToLocalStorage('checkboxState', isCheckboxActive);
         }
       }
-   
+
       return
     } catch (err) {
       console.log(err);
@@ -115,8 +117,8 @@ function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
   }
 
   function resize() {
-    if (width >= WIDTH_3_MOVIES) {
-      setMoviesToInitialRender({ current: MOVIES_12_RENDER, next: MOVIES_3_ADD });
+    if (width >= WIDTH_4_MOVIES) {
+      setMoviesToInitialRender({ current: MOVIES_12_RENDER, next: MOVIES_4_ADD });
     } else if (width < WIDTH_2_MOVIES) {
       setMoviesToInitialRender({ current: MOVIES_5_RENDER, next: MOVIES_2_ADD });
     } else {
@@ -131,26 +133,24 @@ function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
   return (
     <main className="movies">
       <SearchForm
+        // isLoading={isLoading}
         handleSearch={setSearchRequest}
         handleCheckboxClick={handleCheckboxClick}
         searchRequest={searchRequest}
         checkboxState={isCheckboxActive}
       />
-      {/* <FilterCheckbox 
-        handleCheckboxClick={handleCheckboxClick}
-        // onClick={handleCheckboxClick} 
-        checkboxState={isCheckboxActive}
-       /> */}
-      <MoviesCardList
+      {isLoading 
+      ? <Preloader/>
+      : <MoviesCardList
         movies={isCheckboxActive ? shortMovies : foundMovies}
-        isLoading={isLoading}
+        // isLoading={isLoading}
         onClick={handleMoreClick}
         limit={moviesToInitialRender.current}
         isSavedMovies={false}
         onSave={onSave}
         onDelete={onDelete}
         savedMovies={savedMovies}
-      />
+      />}
       <InfoTooltip
         isOpen={isInfoTooltipPopupOpen}
         title={infoTooltiptext}

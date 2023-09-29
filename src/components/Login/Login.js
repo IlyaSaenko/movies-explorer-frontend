@@ -19,7 +19,7 @@ function Login({ ...props }) {
       password: values.password
     })
   };
-
+  console.log("Login => isLoading=" + props.isLoading)
   return (
     <main className="register login">
       <section className="register__section" aria-label="Секция регистрации">

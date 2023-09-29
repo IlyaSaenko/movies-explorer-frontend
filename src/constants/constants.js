@@ -5,14 +5,14 @@ export const RECEIVING_DATA_ERROR = 'Во время запроса произо
 'Возможно, проблема с соединением или сервер недоступен. ' +
 'Подождите немного и попробуйте ещё раз.';
 
-export const WIDTH_3_MOVIES = 1020;
+export const WIDTH_4_MOVIES = 1020;
 export const WIDTH_2_MOVIES = 690;
 
 export const MOVIES_12_RENDER = 12;
 export const MOVIES_8_RENDER = 8;
 export const MOVIES_5_RENDER = 5;
 
-export const MOVIES_3_ADD = 3;
+export const MOVIES_4_ADD = 4;
 export const MOVIES_2_ADD = 2;
 
 export const SHORT_FILM = 40;

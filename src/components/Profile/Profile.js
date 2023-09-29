@@ -24,7 +24,9 @@ function Profile({ onUpdateUserInfo, signOut, isLoading, errorMessage }) {
     evt.preventDefault();
     onUpdateUserInfo({ email, name })
   };
-
+  console.log(isDisabled)
+  console.log(isValid)
+  console.log(currentUser)
   return (
     <form className="profile register" onSubmit={handleSubmit} noValidate>
       {isLoading ? <Preloader /> : ''}

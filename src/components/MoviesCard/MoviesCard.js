@@ -1,6 +1,6 @@
 import React from 'react';
 import likeButton from '../../../src/images/like-button.svg';
-import dislikeButton from '../../../src/images/unlike-button.svg';
+import unlikeButton from '../../../src/images/unlike-button.svg';
 import deleteMovieButton from '../../../src/images/delete-movie.svg';
 import movieDuration from './src/../../../utils/DurationChange';
 
@@ -18,7 +18,7 @@ function MoviesCard({isSavedMovies, onSave, onDelete, movie, savedMovies}) {
     return false;
   })
 
-  const buttonImage = (isSavedMovies ? deleteMovieButton : isLiked ? likeButton : dislikeButton);
+  const buttonImage = (isSavedMovies ? deleteMovieButton : isLiked ? likeButton : unlikeButton);
   return (
     <li className="movie">
       <a className="movie__trailer-link" href={trailerLink} target="_blank" rel="noreferrer">
@@ -26,7 +26,7 @@ function MoviesCard({isSavedMovies, onSave, onDelete, movie, savedMovies}) {
       </a>
       <div className="movie__info">
         <figcaption className="movie__figcaption">
-          <h2 className="movie__title">{nameRU}</h2>
+          <h1 className="movie__title">{nameRU}</h1>
           <h3 className="movie__duration">{convertedDuration}</h3>
         </figcaption>
         <button

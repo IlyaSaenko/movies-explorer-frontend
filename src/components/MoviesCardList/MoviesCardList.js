@@ -1,14 +1,14 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader';
+// import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({ movies, isLoading, onClick, limit, isSavedMovies, onSave, onDelete, savedMovies }) {
-
+  // console.log("MoviesCardList => isLoading=" + isLoading)
   return (
     <>
       <ul className="movies__section" aria-label="Секция с карточками">
         {
-          isLoading ? <Preloader /> :
+          // isLoading ? <Preloader /> :
             movies?.map((movie, index, array) => {
               return (
                 index < limit &&
@@ -27,9 +27,9 @@ function MoviesCardList({ movies, isLoading, onClick, limit, isSavedMovies, onSa
       {
         (movies.length > limit) &&
         (
-          <section className="more-section" aria-label="Секция с кнопкой Ёще">
+          <section className="movies__section-more" aria-label="Секция с кнопкой Ёще">
             <button
-              className="more-section__button"
+              className="movies__more-button"
               type="button"
               onClick={onClick}
             >Ещё

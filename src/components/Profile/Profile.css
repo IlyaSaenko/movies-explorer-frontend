@@ -94,7 +94,18 @@
   font-weight: 400;
   transition: opacity 0.35s linear;
   cursor: pointer;
+  /* background-color: rgba(66, 133, 244, 1); */
   color: #ffffff;
+}
+
+.profile__edit-button[disabled] {
+  color: #919191;
+  /* opacity: 0.3; */
+}
+
+.profile__edit-button[disabled]:hover {
+  /* opacity: 0.1; */
+  cursor: default;
 }
 
 .profile__edit-button:hover {
@@ -102,10 +113,10 @@
 }
 
 .profile__edit-button_disabled {
-  opacity: 0.3;
+  color: #919191;
   pointer-events: none;
-  /* background-color: #FFFFFF; */
-  color: #ffffff;
+  /* background-color: #ffffff; */
+  /* color: #ffffff; */
 }
 
 .profile__signout-button {
@@ -117,7 +128,6 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 13px;
   line-height: 16px;
-  font-style: normal;
   font-weight: 500;
   transition: opacity 0.35s linear;
   cursor: pointer;

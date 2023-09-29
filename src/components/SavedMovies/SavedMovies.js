@@ -7,7 +7,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import failImage from '../../images/entry-bad.svg';
 import { MOVIES_NOT_FOUND, KEYWORD_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
-import { WIDTH_3_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_3_ADD, MOVIES_2_ADD } from '../../constants/constants';
+import { WIDTH_4_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_4_ADD, MOVIES_2_ADD } from '../../constants/constants';
 import useWindowWidth from '../../utils/WindowWidth';
 
 function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
@@ -92,8 +92,8 @@ function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
   }
 
   function resize() {
-    if (width >= WIDTH_3_MOVIES) {
-      setMoviesToInitialRender({ current: MOVIES_12_RENDER, next: MOVIES_3_ADD });
+    if (width >= WIDTH_4_MOVIES) {
+      setMoviesToInitialRender({ current: MOVIES_12_RENDER, next: MOVIES_4_ADD });
     } else if (width < WIDTH_2_MOVIES) {
       setMoviesToInitialRender({ current: MOVIES_5_RENDER, next: MOVIES_2_ADD });
     } else {
