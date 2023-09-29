@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+// import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import failImage from '../../images/entry-bad.svg';
 import { MOVIES_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
@@ -136,7 +136,11 @@ function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
         searchRequest={searchRequest}
         checkboxState={isCheckboxActive}
       />
-      <FilterCheckbox />
+      {/* <FilterCheckbox 
+        handleCheckboxClick={handleCheckboxClick}
+        // onClick={handleCheckboxClick} 
+        checkboxState={isCheckboxActive}
+       /> */}
       <MoviesCardList
         movies={isCheckboxActive ? shortMovies : foundMovies}
         isLoading={isLoading}

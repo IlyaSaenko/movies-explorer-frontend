@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import useValidation from '../../utils/Validation';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm({ handleSearch, handleCheckboxClick, searchRequest, checkboxState }) {
   const { values, errors, handleChange, resetValidation, isValid } = useValidation();
@@ -37,6 +38,7 @@ function SearchForm({ handleSearch, handleCheckboxClick, searchRequest, checkbox
           />
           <span className="searchform__input-error"></span>
         </label>
+        <FilterCheckbox onClick={handleCheckboxClick} checkboxState={checkboxState}/>
       </form>
     </section>
   );

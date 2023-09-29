@@ -78,16 +78,16 @@ class MainApi {
     .then(this._getResponseData);
   }
 
-  // getToken() {
-  //   return this._headers.authorization = `Bearer ${localStorage.getItem('jwt')}`;
-  // }
+  getToken() {
+    return this._headers.authorization = `Bearer ${localStorage.getItem('jwt')}`;
+  }
 }
 
 const mainApi = new MainApi({
+  // baseUrl: 'http://localhost:3000',
   baseUrl: 'https://movies.diplom.api.nomoredomainsicu.ru',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
   }
 });
 

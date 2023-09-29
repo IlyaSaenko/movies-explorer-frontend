@@ -26,7 +26,7 @@ function Profile({ onUpdateUserInfo, signOut, isLoading, errorMessage }) {
   };
 
   return (
-    <main className="profile register" onSubmit={handleSubmit} noValidate>
+    <form className="profile register" onSubmit={handleSubmit} noValidate>
       {isLoading ? <Preloader /> : ''}
       <h1 className="profile__title">Привет, {currentUser.name}!</h1>
       <fieldset className="profile__inputs-block">
@@ -77,7 +77,7 @@ function Profile({ onUpdateUserInfo, signOut, isLoading, errorMessage }) {
           <button className="profile__signout-button" onClick={signOut}>Выйти из аккаунта</button>
         </div>
       </div>
-    </main>
+    </form>
   );
 }
 

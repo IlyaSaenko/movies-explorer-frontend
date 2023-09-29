@@ -58,7 +58,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // mainApi.getToken();
+    mainApi.getToken();
     if (loggedIn) {
       mainApi.getAllNeededData()
         .then(([userInfo, savedByUserMovies]) => {
@@ -155,7 +155,6 @@ function App() {
     navigate('/');
   }
 
-  const handleMenuPopupClick = () => setIsMenuPopupOpen(true);
 
   const closeAllPopups = () => {
     setIsMenuPopupOpen(false);
@@ -178,6 +177,7 @@ function App() {
     setIsLoading(true);
     moviesApi.getAllMovies()
       .then((dataForInitialMovies) => {
+        console.log("handleGetAllMovies: " + dataForInitialMovies)
         const transformedmovies = transformMovieHandle(dataForInitialMovies);
         localStorage.setItem('allMovies', JSON.stringify(transformedmovies));
         setInitialMovies(transformedmovies);
@@ -191,6 +191,7 @@ function App() {
   function checkLocalStorage() {
     const allMovies = localStorage.getItem('allMovies');
     if (allMovies) {
+      console.log("checkLocalStorage: " + allMovies)
       setInitialMovies(JSON.parse(allMovies))
     } else {
       handleGetAllMovies();
@@ -221,6 +222,8 @@ function App() {
         setIsLoading(false);
       })
   }
+
+  const handleMenuPopupClick = () => setIsMenuPopupOpen(true);
 
   return (
     <div className="App">

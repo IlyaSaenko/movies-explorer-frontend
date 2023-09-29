@@ -39,6 +39,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .register__inputs-block {
@@ -79,23 +80,30 @@
 }
 
 .register__input-error {
+  display: none;
+}
+
+.register__input-error_active {
+  width: 396px;
+  display: block;
+  position:absolute;
+  text-align: center;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 10px;
-  line-height: 12px;
+  line-height: 11px;
   font-weight: 400;
   color: #FF4062;
 }
 
-.register__input-error_active {
+.register__error {
+  width: 396px;
   display: block;
+  text-align: center;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 10px;
   line-height: 11px;
-  font-style: normal;
   font-weight: 400;
   color: #FF4062;
-  position:absolute;
-  width: 396px;
 }
 
 .register__buttons-block {

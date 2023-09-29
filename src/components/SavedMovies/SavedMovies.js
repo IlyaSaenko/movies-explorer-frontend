@@ -113,7 +113,7 @@ function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
         searchRequest={searchRequest}
         checkboxState={isCheckboxActive}
       />
-      <FilterCheckbox />
+      {/* <FilterCheckbox /> */}
       <MoviesCardList
         movies={!searchRequest ? isCheckboxActive ? shotMovies : initialMovies : isCheckboxActive ? shotMovies : foundMovies}
         isLoading={isLoading}
