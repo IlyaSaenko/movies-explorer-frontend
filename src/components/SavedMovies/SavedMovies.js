@@ -6,14 +6,15 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import failImage from '../../images/entry-bad.svg';
-import { MOVIES_NOT_FOUND, KEYWORD_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
+import { MOVIES_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
 import { WIDTH_4_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_4_ADD, MOVIES_2_ADD } from '../../constants/constants';
 import useWindowWidth from '../../utils/WindowWidth';
+import Preloader from '../Preloader/Preloader';
 
 function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
   const [isLoading, setIsLoading] = useState(false);
   const [foundMovies, setFoundMovies] = useState([]);
-  const [shotMovies, setShotMovies] = useState([]);
+  const [shortMovies, setShortMovies] = useState([]);
   const [searchRequest, setSearchRequest] = useState('');
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   const [infoTooltiptext, setInfoTooltiptext] = useState('');
@@ -47,10 +48,7 @@ function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
           setFoundMovies(moviesToRender);
         }
       }
-      // else {
-      //   setInfoTooltiptext(KEYWORD_NOT_FOUND);
-      //   setInfoTooltipPopupOpen(true);
-      // }
+
       return
     } catch (err) {
       console.log(err);
@@ -74,7 +72,7 @@ function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
   }
 
   function filterShotMoviesHandler() {
-    setShotMovies(handleFilter(foundMovies));
+    setShortMovies(handleFilter(foundMovies));
   }
 
   function handleCheckboxClick(value) {
@@ -113,17 +111,18 @@ function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
         searchRequest={searchRequest}
         checkboxState={isCheckboxActive}
       />
-      {/* <FilterCheckbox /> */}
-      <MoviesCardList
-        movies={!searchRequest ? isCheckboxActive ? shotMovies : initialMovies : isCheckboxActive ? shotMovies : foundMovies}
-        isLoading={isLoading}
-        onClick={handleMoreClick}
-        limit={moviesToInitialRender.current}
-        isSavedMovies={true}
-        onSave={onSave}
-        onDelete={onDelete}
-        savedMovies={savedMovies}
-      />
+      {isLoading
+        ? <Preloader />
+        : <MoviesCardList
+          movies={!searchRequest ? isCheckboxActive ? shortMovies : initialMovies : isCheckboxActive ? shortMovies : foundMovies}
+          // isLoading={isLoading}
+          onClick={handleMoreClick}
+          limit={moviesToInitialRender.current}
+          isSavedMovies={true}
+          onSave={onSave}
+          onDelete={onDelete}
+          savedMovies={savedMovies}
+        />}
       {
         (
           <section className="movies__line-area" aria-label="Область, разделяющая фильмы и футер" />

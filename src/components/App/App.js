@@ -155,7 +155,6 @@ function App() {
     navigate('/');
   }
 
-
   const closeAllPopups = () => {
     setIsMenuPopupOpen(false);
     setInfoTooltipPopupOpen(false);
@@ -177,10 +176,10 @@ function App() {
     setIsLoading(true);
     moviesApi.getAllMovies()
       .then((dataForInitialMovies) => {
-        console.log("handleGetAllMovies=> isLoading=" + isLoading)
-        const transformedmovies = transformMovieHandle(dataForInitialMovies);
-        localStorage.setItem('allMovies', JSON.stringify(transformedmovies));
-        setInitialMovies(transformedmovies);
+        // console.log("handleGetAllMovies=> isLoading=" + isLoading)
+        const transformedMovies = transformMovieHandle(dataForInitialMovies);
+        localStorage.setItem('allMovies', JSON.stringify(transformedMovies));
+        setInitialMovies(transformedMovies);
       })
       .catch(err => console.log(err))
       .finally(() => {

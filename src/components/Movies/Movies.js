@@ -36,7 +36,7 @@ function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
 
   async function searchMoviesHandler() {
     setIsLoading(true);
-    console.log("searchMoviesHandler => isLoading=" + isLoading);
+    // console.log("searchMoviesHandler => isLoading=" + isLoading);
     // setFoundMovies([]);
     try {
       if (searchRequest.length > 0) {
