@@ -1,44 +1,29 @@
 import React from 'react';
+import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-// import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ movies, isLoading, onClick, limit, isSavedMovies, onSave, onDelete, savedMovies }) {
-  // console.log("MoviesCardList => isLoading=" + isLoading)
+export default function MoviesCardList({ movies, savesMovies, setSavesMovies, handleDeleteMovie, isLoading, searchError }) {
   return (
-    <>
-      <ul className="movies__section" aria-label="Секция с карточками">
-        {
-          // isLoading ? <Preloader /> :
-            movies?.map((movie, index, array) => {
-              return (
-                index < limit &&
-                <MoviesCard
-                  isSavedMovies={isSavedMovies}
-                  onSave={onSave}
-                  onDelete={onDelete}
-                  movie={movie}
-                  savedMovies={savedMovies}
-                  key={movie.movieId}
-                />
-              )
-            }
-            )}
-      </ul>
-      {
-        (movies.length > limit) &&
-        (
-          <section className="movies__section-more" aria-label="Секция с кнопкой Ёще">
-            <button
-              className="movies__more-button"
-              type="button"
-              onClick={onClick}
-            >Ещё
-            </button>
-          </section>
-        )
-      }
-    </>
+    <section className='movies-container'>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <>
+          <ul className='movies-container__list'>
+            {movies.map((movie) => (
+              <MoviesCard
+                key={movie.id || movie._id}
+                movie={movie}
+                savesMovies={savesMovies}
+                setSavesMovies={setSavesMovies}
+                onDeleteMovie={handleDeleteMovie}
+              />
+            ))}
+          </ul>
+          <span className='movies-container__error'>{searchError}</span>
+        </>
+      )}
+    </section>
   );
 }
-
-export default MoviesCardList;

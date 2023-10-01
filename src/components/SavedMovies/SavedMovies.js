@@ -1,143 +1,76 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import failImage from '../../images/entry-bad.svg';
-import { MOVIES_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
-import { WIDTH_4_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_4_ADD, MOVIES_2_ADD } from '../../constants/constants';
-import useWindowWidth from '../../utils/WindowWidth';
-import Preloader from '../Preloader/Preloader';
+import { mainApi } from '../../utils/MainApi';
+import { searchAndFilterMovies } from '../../utils/utils';
 
-function SavedMovies({ initialMovies, onSave, onDelete, savedMovies }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [foundMovies, setFoundMovies] = useState([]);
-  const [shortMovies, setShortMovies] = useState([]);
-  const [searchRequest, setSearchRequest] = useState('');
-  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
-  const [infoTooltiptext, setInfoTooltiptext] = useState('');
-  const [isCheckboxActive, setIsCheckboxActive] = useState(false);
-  const [moviesToInitialRender, setMoviesToInitialRender] = useState({ current: 0, next: 0 });
-  const { width } = useWindowWidth();
+const SavedMovies = () => {
+  const [savesMovies, setSavesMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [shortFilm, setShortFilm] = useState(false);
 
   useEffect(() => {
-    setFoundMovies(initialMovies);
-  }, [])
+    const jwt = localStorage.getItem('jwt');
+    mainApi
+      .getMovies(jwt)
+      .then((res) => {
+        setSavesMovies(res);
+        localStorage.setItem('savesMovies', JSON.stringify(res));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  useEffect(() => {
-    searchMoviesHandler();
-    filterShotMoviesHandler();
-  }, [searchRequest, isCheckboxActive]);
-
-  useEffect(() => {
-    resize()
-  }, [width]);
-
-  async function searchMoviesHandler() {
-    setIsLoading(true);
-    // setFoundMovies([]);
-    try {
-      if (searchRequest.length > 0) {
-        const moviesToRender = await handleSearch(initialMovies, searchRequest);
-        if (moviesToRender.length === 0) {
-          setInfoTooltiptext(MOVIES_NOT_FOUND);
-          setInfoTooltipPopupOpen(true);
-        } else {
-          setFoundMovies(moviesToRender);
-        }
-      }
-
-      return
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
+  function handleSearch() {
+    const store = localStorage.getItem('savesMovies');
+    if (store) {
+      setSavesMovies(JSON.parse(store));
+      const filterMoviesArray = searchAndFilterMovies(JSON.parse(store), searchQuery, shortFilm);
+      setSavesMovies(filterMoviesArray);
     }
   }
 
-  function handleSearch(moviesArray, keyword) {
-    return moviesArray.filter((movie) => {
-      const a = keyword.toLowerCase().trim();
-      return movie.nameRU.toLowerCase().indexOf(a) !== -1 ||
-        movie.nameEN.toLowerCase().indexOf(a) !== -1
-    })
-  }
+  function handleCheckBox(evt) {
+    const value = evt.target.checked;
+    setShortFilm(value);
 
-  function handleFilter(moviesArray) {
-    return moviesArray.filter((movie) => {
-      return movie.duration <= SHORT_FILM;
-    });
-  }
-
-  function filterShotMoviesHandler() {
-    setShortMovies(handleFilter(foundMovies));
-  }
-
-  function handleCheckboxClick(value) {
-    setIsCheckboxActive(value);
-  }
-
-  function closeAllPopups() {
-    setInfoTooltipPopupOpen(false);
-  }
-
-  function handleOverlayClick(evt) {
-    if (evt.target === evt.currentTarget) {
-      closeAllPopups();
+    const store = JSON.parse(localStorage.getItem('savesMovies'));
+    if (store) {
+      const filterMoviesArray = searchAndFilterMovies(store, searchQuery, value);
+      setSavesMovies(filterMoviesArray);
     }
   }
 
-  function resize() {
-    if (width >= WIDTH_4_MOVIES) {
-      setMoviesToInitialRender({ current: MOVIES_12_RENDER, next: MOVIES_4_ADD });
-    } else if (width < WIDTH_2_MOVIES) {
-      setMoviesToInitialRender({ current: MOVIES_5_RENDER, next: MOVIES_2_ADD });
-    } else {
-      setMoviesToInitialRender({ current: MOVIES_8_RENDER, next: MOVIES_2_ADD });
-    }
-  }
-
-  function handleMoreClick() {
-    setMoviesToInitialRender({ current: moviesToInitialRender.current + moviesToInitialRender.next, next: moviesToInitialRender.next });
+  function handleDeleteMovie(movieId) {
+    const jwt = localStorage.getItem('jwt');
+    mainApi
+      .deleteMovie(movieId, jwt)
+      .then(() => {
+        const findMovieById = savesMovies.filter((movie) => movie._id !== movieId);
+        setSavesMovies(findMovieById);
+        const findSaveMovieById = JSON.parse(localStorage.getItem('savesMovies')).filter((item) => item._id !== movieId);
+        localStorage.setItem('savesMovies', JSON.stringify(findSaveMovieById));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
-    <main className="movies saved-movies">
+    <section className='saved-movies'>
       <SearchForm
-        handleSearch={setSearchRequest}
-        handleCheckboxClick={handleCheckboxClick}
-        searchRequest={searchRequest}
-        checkboxState={isCheckboxActive}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        shortFilm={shortFilm}
+        handleCheckBox={handleCheckBox}
+        handleSearch={handleSearch}
       />
-      {isLoading
-        ? <Preloader />
-        : <MoviesCardList
-          movies={!searchRequest ? isCheckboxActive ? shortMovies : initialMovies : isCheckboxActive ? shortMovies : foundMovies}
-          // isLoading={isLoading}
-          onClick={handleMoreClick}
-          limit={moviesToInitialRender.current}
-          isSavedMovies={true}
-          onSave={onSave}
-          onDelete={onDelete}
-          savedMovies={savedMovies}
-        />}
-      {
-        (
-          <section className="movies__line-area" aria-label="Область, разделяющая фильмы и футер" />
-        )
-      }
-
-      <InfoTooltip
-        isOpen={isInfoTooltipPopupOpen}
-        title={infoTooltiptext}
-        onClose={closeAllPopups}
-        onOverlayClick={handleOverlayClick}
-        image={failImage}
-      />
-    </main>
+      <MoviesCardList movies={savesMovies} handleDeleteMovie={handleDeleteMovie} />
+      <div className='saved-movies__line-area'></div>
+    </section>
   );
-}
+};
 
 export default SavedMovies;

@@ -1,47 +1,91 @@
-import React from 'react';
-import likeButton from '../../../src/images/like-button.svg';
-import unlikeButton from '../../../src/images/unlike-button.svg';
-import deleteMovieButton from '../../../src/images/delete-movie.svg';
-import movieDuration from './src/../../../utils/DurationChange';
+import React, { useState } from 'react';
+import './MoviesCard.css';
+import { useLocation } from 'react-router-dom';
+import { durationFilm } from '../../utils/utils';
+import { mainApi } from '../../utils/MainApi';
 
-function MoviesCard({isSavedMovies, onSave, onDelete, movie, savedMovies}) {
-  const {nameRU, image, duration, trailerLink} = movie;
-  const convertedDuration = movieDuration(duration);
+export default function MoviesCard({ movie, savesMovies, setSavesMovies, onDeleteMovie }) {
+  const location = useLocation();
+  const deleteBg = location.pathname === '/saved-movies';
 
-  let isLiked = false;
-  let likedId;
-  isLiked = savedMovies.some((item) => {
-    if (item.movieId === movie.movieId) {
-      likedId = item._id;
-      return true;
+  const [isSaved, setIsSaved] = useState(movie.saveMovie);
+  const imageUrl = movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image;
+
+  function handleButtonClick() {
+    const jwt = localStorage.getItem('jwt');
+    if (!deleteBg) {
+      if (isSaved) {
+        handleDeleteMovie(movie, jwt);
+      } else {
+        handleSaveMovie(movie, jwt);
+      }
+    } else {
+      onDeleteMovie(movie._id, jwt);
     }
-    return false;
-  })
+  }
 
-  const buttonImage = (isSavedMovies ? deleteMovieButton : isLiked ? likeButton : unlikeButton);
+  function handleSaveMovie(movie) {
+    const jwt = localStorage.getItem('jwt');
+    setIsSaved(false);
+    return mainApi
+      .saveMovie(
+        {
+          country: movie.country,
+          director: movie.director,
+          duration: movie.duration,
+          year: movie.year,
+          description: movie.description,
+          image: `https://api.nomoreparties.co/${movie.image.url}`,
+          trailerLink: movie.trailerLink,
+          thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+          movieId: movie.id,
+          nameRU: movie.nameRU,
+          nameEN: movie.nameEN,
+        },
+        jwt
+      )
+      .then((res) => {
+        setIsSaved(true);
+        setSavesMovies([res, ...savesMovies]);
+        localStorage.setItem('savesMovies', JSON.stringify([res, ...savesMovies]));
+      })
+      .catch((err) => {
+        setIsSaved(false);
+        console.error(err);
+      });
+  }
+
+  function handleDeleteMovie(movie) {
+    const jwt = localStorage.getItem('jwt');
+    setIsSaved(true);
+    const findMovie = savesMovies.find((i) => i.movieId === movie.id);
+    const movieId = findMovie._id;
+
+    mainApi
+      .deleteMovie(movieId, jwt)
+      .then((res) => {
+        setIsSaved(false);
+        setSavesMovies((state) => state.filter((c) => c._id !== movieId));
+        localStorage.setItem('savesMovies', JSON.stringify(savesMovies.filter((item) => item._id !== movieId)));
+      })
+      .catch((err) => {
+        setIsSaved(true);
+        console.log(err);
+      });
+  }
+
   return (
-    <li className="movie">
-      <a className="movie__trailer-link" href={trailerLink} target="_blank" rel="noreferrer">
-        <img className="movie__image" src={image} alt={nameRU} />
-      </a>
-      <div className="movie__info">
-        <figcaption className="movie__figcaption">
-          <h1 className="movie__title">{nameRU}</h1>
-          <h3 className="movie__duration">{convertedDuration}</h3>
-        </figcaption>
+    <li className='movie'>
+      <a href={movie.trailerLink} rel='noreferrer' className='movies-card__link' target='_blank'><img className='movies-card__photo' src={imageUrl} alt={movie.nameRU} /></a>
+      <div className='movie__container'>
+        <h2 className='movie__name'>{movie.nameRU}</h2>
         <button
-          className="movie__like-button"
-          name="movie__like-button"
-          type="button"
-          onClick={() => {
-            isLiked || isSavedMovies ? onDelete(movie._id ? movie._id : likedId) : onSave(movie);
-          }}
-        >
-          <img className="movie__like-image" src={buttonImage} alt="Кнопка лайка"></img>
-        </button>
+          className={`movie__button-save-like ${isSaved ? 'movie__button-save-like_active' : ''} ${deleteBg ? 'movie__button-save-close' : ''}`}
+          type='button'
+          onClick={handleButtonClick}
+        ></button>
       </div>
+      <p className='movie__duration'>{durationFilm(movie.duration)}</p>
     </li>
   );
 }
-
-export default MoviesCard;

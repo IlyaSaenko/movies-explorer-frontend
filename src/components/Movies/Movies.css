@@ -1,5 +1,5 @@
 .movies {
-  width: 1140px;
+  max-width: 1140px;
   margin: 50px 70px 10px;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,6 @@
   .movies {
     max-width: calc(100% - 60px);
     margin: 80px 30px 10px;
-    /* width: 708px; */
   }
 }
 

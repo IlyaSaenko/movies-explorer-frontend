@@ -1,165 +1,149 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
+import MoviesCardList from '..//MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-// import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import failImage from '../../images/entry-bad.svg';
-import { MOVIES_NOT_FOUND, SHORT_FILM } from '../../constants/constants';
-import { WIDTH_4_MOVIES, WIDTH_2_MOVIES, MOVIES_12_RENDER, MOVIES_8_RENDER, MOVIES_5_RENDER, MOVIES_4_ADD, MOVIES_2_ADD } from '../../constants/constants';
-import useWindowWidth from '../../utils/WindowWidth';
-import Preloader from '../Preloader/Preloader';
+import MoreButton from '../MoreButton/MoreButton';
+import { moviesApi } from '../../utils/MoviesApi';
+import { searchAndFilterMovies } from '../../utils/utils';
+import { mainApi } from '../../utils/MainApi';
+import useVisibleMovies from '../../hooks/useVisibleMovies';
 
-function Movies({ loggedIn, initialMovies, onSave, onDelete, savedMovies }) {
+const Movies = () => {
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('beatMovies')) || []);
+  const [filtredMovies, setFiltredMovies] = useState(JSON.parse(localStorage.getItem('filteredMovies')) || []);
+  const [savesMovies, setSavesMovies] = useState(JSON.parse(localStorage.getItem('savesMovies')) || []);
+  const [searchQuery, setSearchQuery] = useState(localStorage.getItem('query') || '');
+  const [shortFilm, setShortFilm] = useState(JSON.parse(localStorage.getItem('isShort')) || false);
+  const [searchError, setSearchError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [foundMovies, setFoundMovies] = useState([]);
-  const [shortMovies, setShortMovies] = useState([]);
-  const [searchRequest, setSearchRequest] = useState('');
-  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
-  const [infoTooltiptext, setInfoTooltiptext] = useState('');
-  const [isCheckboxActive, setIsCheckboxActive] = useState(false);
-  const [moviesToInitialRender, setMoviesToInitialRender] = useState({ current: 0, next: 0 });
-  const { width } = useWindowWidth();
+  const [visibleMoviesCount, setVisibleMoviesCount] = useVisibleMovies();
 
-  useEffect(() => {
-    searchMoviesHandler();
-    filterShotMoviesHandler();
-  }, [searchRequest, isCheckboxActive]);
+  const likedMovies = filtredMovies.map((item) => ({
+    ...item,
+    saveMovie: savesMovies.find((saveMovie) => saveMovie.movieId === item.id) || null
+  }));
 
-  useEffect(() => {
-    checkLastRequest();
-  }, []);
+  function handleSearch() {
+    setSearchError('');
+    const store = localStorage.getItem('beatMovies');
+    if (store) {
+      setFiltredMovies(JSON.parse(store));
+      const filterMoviesArray = searchAndFilterMovies(JSON.parse(store), searchQuery, shortFilm);
+      setFiltredMovies(filterMoviesArray);
+      localStorage.setItem('filteredMovies', JSON.stringify(filterMoviesArray));
+      localStorage.setItem('query', searchQuery);
 
-  useEffect(() => {
-    resize()
-  }, [width]);
-
-  async function searchMoviesHandler() {
-    setIsLoading(true);
-    // console.log("searchMoviesHandler => isLoading=" + isLoading);
-    // setFoundMovies([]);
-    try {
-      if (searchRequest.length > 0) {
-        const moviesToRender = await handleSearch(initialMovies, searchRequest);
-        if (moviesToRender.length === 0) {
-          setInfoTooltiptext(MOVIES_NOT_FOUND);
-          setInfoTooltipPopupOpen(true);
-        } else {
-          setRequestToLocalStorage('lastRequest', searchRequest);
-          setRequestToLocalStorage('lastRequestedMovies', moviesToRender);
-          setFoundMovies(moviesToRender);
-          setRequestToLocalStorage('checkboxState', isCheckboxActive);
-        }
+      if (filterMoviesArray.length === 0) {
+        setSearchError('Ничего не найдено');
+        return;
       }
-
-      return
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  function handleSearch(moviesArray, keyword) {
-    return moviesArray.filter((movie) => {
-      const a = keyword.toLowerCase().trim();
-      return movie.nameRU.toLowerCase().indexOf(a) !== -1 ||
-        movie.nameEN.toLowerCase().indexOf(a) !== -1
-    })
-  }
-
-  function handleFilter(moviesArray) {
-    return moviesArray.filter((movie) => {
-      return movie.duration <= SHORT_FILM;
-    });
-  }
-
-  function filterShotMoviesHandler() {
-    setShortMovies(handleFilter(foundMovies));
-  }
-
-  function setRequestToLocalStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  function checkLastRequest() {
-    const lastMovies = localStorage.getItem('lastRequestedMovies');
-    if (lastMovies) {
-      setFoundMovies(getLastRequestFromLocalStorage('lastRequestedMovies'));
-    }
-    const lastRequestedKeyword = localStorage.getItem('lastRequest');
-    if (lastRequestedKeyword) {
-      setSearchRequest(getLastRequestFromLocalStorage('lastRequest'));
-    }
-    const lastRequestedCheckboxState = localStorage.getItem('checkboxState');
-    if (lastRequestedCheckboxState) {
-      setIsCheckboxActive(getLastRequestFromLocalStorage('checkboxState'));
-    }
-    return
-  }
-
-  function getLastRequestFromLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
-  }
-
-  function handleCheckboxClick(value) {
-    setIsCheckboxActive(value);
-  }
-
-  function closeAllPopups() {
-    setInfoTooltipPopupOpen(false);
-  }
-
-  function handleOverlayClick(evt) {
-    if (evt.target === evt.currentTarget) {
-      closeAllPopups();
-    }
-  }
-
-  function resize() {
-    if (width >= WIDTH_4_MOVIES) {
-      setMoviesToInitialRender({ current: MOVIES_12_RENDER, next: MOVIES_4_ADD });
-    } else if (width < WIDTH_2_MOVIES) {
-      setMoviesToInitialRender({ current: MOVIES_5_RENDER, next: MOVIES_2_ADD });
     } else {
-      setMoviesToInitialRender({ current: MOVIES_8_RENDER, next: MOVIES_2_ADD });
+      setIsLoading(true);
+      setSearchError('');
+      moviesApi
+        .getBeatMovies()
+        .then((res) => {
+          setMovies(res);
+          localStorage.setItem('beatMovies', JSON.stringify(res));
+          localStorage.setItem('isShort', shortFilm);
+          localStorage.setItem('query', searchQuery);
+          const filterMoviesArray = searchAndFilterMovies(res, searchQuery, shortFilm);
+          setFiltredMovies(filterMoviesArray);
+          localStorage.setItem('filteredMovies', JSON.stringify(filterMoviesArray));
+
+          if (filterMoviesArray.length === 0) {
+            setSearchError('Ничего не найдено');
+            return;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setSearchError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.');
+          setFiltredMovies([]);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+      const jwt = localStorage.getItem('jwt');
+      mainApi
+        .getMovies(jwt)
+        .then((res) => {
+          setSavesMovies(res);
+          localStorage.setItem('savesMovies', JSON.stringify(res));
+        })
+        .catch((res) => {
+          console.log(res);
+        });
     }
   }
 
-  function handleMoreClick() {
-    setMoviesToInitialRender({ current: moviesToInitialRender.current + moviesToInitialRender.next, next: moviesToInitialRender.next });
+  function handleCheckBox(evt) {
+    const value = evt.target.checked;
+    setShortFilm(value);
+    localStorage.setItem('isShort', value);
+
+    const store = localStorage.getItem('filteredMovies');
+    if (store) {
+      const filterMoviesArray = searchAndFilterMovies(movies, searchQuery, value);
+      setFiltredMovies(filterMoviesArray);
+      localStorage.setItem('filteredMovies', JSON.stringify(filterMoviesArray));
+    }
   }
+
+  useEffect(() => {
+    function handleResize() {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth > 1100) {
+        setVisibleMoviesCount(16);
+      } else if (screenWidth >= 821) {
+        setVisibleMoviesCount(12);
+      } else if (screenWidth >= 501) {
+        setVisibleMoviesCount(8);
+      } else if (screenWidth <= 500) {
+        setVisibleMoviesCount(5);
+      }
+      const resizeTimeoutDelay = 500;
+      let resizeTimeout;
+
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(handleResize, resizeTimeoutDelay);
+      });
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        clearTimeout(resizeTimeout);
+      };
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [searchQuery, setVisibleMoviesCount]);
 
   return (
-    <main className="movies">
+    <section className='movies'>
       <SearchForm
-        // isLoading={isLoading}
-        handleSearch={setSearchRequest}
-        handleCheckboxClick={handleCheckboxClick}
-        searchRequest={searchRequest}
-        checkboxState={isCheckboxActive}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleSearch={handleSearch}
+        shortFilm={shortFilm}
+        handleCheckBox={handleCheckBox}
       />
-      {isLoading 
-      ? <Preloader/>
-      : <MoviesCardList
-        movies={isCheckboxActive ? shortMovies : foundMovies}
-        // isLoading={isLoading}
-        onClick={handleMoreClick}
-        limit={moviesToInitialRender.current}
-        isSavedMovies={false}
-        onSave={onSave}
-        onDelete={onDelete}
-        savedMovies={savedMovies}
-      />}
-      <InfoTooltip
-        isOpen={isInfoTooltipPopupOpen}
-        title={infoTooltiptext}
-        onClose={closeAllPopups}
-        onOverlayClick={handleOverlayClick}
-        image={failImage}
+      <MoviesCardList
+        movies={likedMovies.slice(0, visibleMoviesCount)}
+        savesMovies={savesMovies}
+        setSavesMovies={setSavesMovies}
+        isLoading={isLoading}
+        searchError={searchError}
       />
-    </main>
+      {visibleMoviesCount < filtredMovies.length && (
+        <MoreButton setVisibleMoviesCount={setVisibleMoviesCount} visibleMoviesCount={visibleMoviesCount} />
+      )}
+    </section>
   );
-}
+};
 
 export default Movies;

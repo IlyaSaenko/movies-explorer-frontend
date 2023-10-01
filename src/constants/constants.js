@@ -16,3 +16,5 @@ export const MOVIES_4_ADD = 4;
 export const MOVIES_2_ADD = 2;
 
 export const SHORT_FILM = 40;
+
+export const SCREEN_MD = 768;

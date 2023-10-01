@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink  } from 'react-router-dom';
 import  accountLogo from '../../images/logo-slime.svg';
 
 function Navigation({ onMenuPopup }) {
@@ -7,8 +7,8 @@ function Navigation({ onMenuPopup }) {
     <nav className="navigation">
       <div className="navigation__links-movies">
         <>
-          <Link className="navigation__link navigation__link-movies" to="/movies">Фильмы</Link>
-          <Link className="navigation__link" to="/saved-movies">Сохранённые фильмы</Link>
+          <NavLink  className="navigation__link navigation__link-movies" to="/movies">Фильмы</NavLink>
+          <NavLink  className="navigation__link" to="/saved-movies">Сохранённые фильмы</NavLink>
         </>
       </div>
       <div className="navigation__links-account">

@@ -1,5 +1,15 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
+
+// Сергей, добрый день!
+// Спасибо большое за проверку и полезные замечания!
+// Из последних 24 часов спал 4, остальное время полностью ушло на полный рефакторинг movies.
+// Изначально не выходило сделать, не находил никак, в чём проблема. Обращался в чаты.
+// В общем, решил заново поэтапно написать.
+// Надеюсь, получилось, ибо у меня сегодня последний день сдачи.
+// Ещё раз спасибо за проверку!
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import Header from '../Header/Header';
@@ -16,19 +26,16 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import mainApi from '../../utils/MainApi';
-import moviesApi from '../../utils/MoviesApi';
 import userAuth from '../../utils/UserAuth';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import successImage from '../../images/entry-nice.svg';
 import failImage from '../../images/entry-bad.svg';
-import transformMovieHandle from '../../utils/MovieTransform';
 
 function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') || false);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
 
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   const [registered, setRegistered] = useState(false);
@@ -36,7 +43,6 @@ function App() {
   const [infoTooltiptext, setInfoTooltipText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({});
-  const [initialMovies, setInitialMovies] = useState([]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -52,24 +58,6 @@ function App() {
         .catch(err => console.log(err))
     }
   }, [navigate]);
-
-  useEffect(() => {
-    checkLocalStorage()
-  }, []);
-
-  useEffect(() => {
-    mainApi.getToken();
-    if (loggedIn) {
-      mainApi.getAllNeededData()
-        .then(([userInfo, savedByUserMovies]) => {
-          setCurrentUser(userInfo);
-          setSavedMovies(savedByUserMovies);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    }
-  }, [loggedIn]);
 
   const resetErrorMessage = useCallback((clearErrorMessage = '') => {
     setErrorMessage(clearErrorMessage)
@@ -144,12 +132,13 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('lastRequest');
-    localStorage.removeItem('checkboxState');
-    localStorage.removeItem('lastRequestedMovies');
-    localStorage.removeItem('allMovies');
+    // localStorage.removeItem('jwt');
+    // localStorage.removeItem('loggedIn');
+    // localStorage.removeItem('lastRequest');
+    // localStorage.removeItem('checkboxState');
+    // localStorage.removeItem('lastRequestedMovies');
+    // localStorage.removeItem('allMovies');
+    localStorage.clear();
     setLoggedIn(false);
     setCurrentUser({});
     navigate('/');
@@ -172,62 +161,34 @@ function App() {
     }
   }
 
-  function handleGetAllMovies() {
-    setIsLoading(true);
-    moviesApi.getAllMovies()
-      .then((dataForInitialMovies) => {
-        // console.log("handleGetAllMovies=> isLoading=" + isLoading)
-        const transformedMovies = transformMovieHandle(dataForInitialMovies);
-        localStorage.setItem('allMovies', JSON.stringify(transformedMovies));
-        setInitialMovies(transformedMovies);
+  function checkToken() {
+    const token = localStorage.getItem('jwt');
+    mainApi
+      .checkToken(token)
+      .then((res) => {
+        if (!res) {
+          setLoggedIn(false);
+          navigate('/', { replace: true });
+          return;
+        }
+        setLoggedIn(true);
       })
-      .catch(err => console.log(err))
-      .finally(() => {
-        setIsLoading(false);
-      })
+      .catch((error) => {
+        setLoggedIn(false)
+        console.error('Ошибка при проверке токена.', error);
+      });
   }
 
-  function checkLocalStorage() {
-    const allMovies = localStorage.getItem('allMovies');
-    if (allMovies) {
-      console.log("checkLocalStorage: " + allMovies)
-      setInitialMovies(JSON.parse(allMovies))
-    } else {
-      handleGetAllMovies();
-    }
-  }
-
-  function handleSaveMovie(movie) {
-    setIsLoading(true);
-    mainApi.postNewMovie(movie)
-      .then((savedMovie) => {
-        setSavedMovies([savedMovie, ...savedMovies]);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setIsLoading(false);
-      })
-  }
-
-  function handleDeleteMovie(_id) {
-    setIsLoading(true);
-    mainApi.deleteMovie(_id)
-      .then(() => {
-        const restSavedMovies = savedMovies.filter((movie) => movie._id !== _id);
-        setSavedMovies(restSavedMovies);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setIsLoading(false);
-      })
-  }
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   const handleMenuPopupClick = () => setIsMenuPopupOpen(true);
 
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
-      <Routes>
+        <Routes>
           <Route exact path='/'
             element={
               <>
@@ -241,76 +202,52 @@ function App() {
               </>
             }
           />
-          <Route path='/movies'
-            element={
-              <>
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  component={Header}
-                  headerClass={'header'}
-                  onMenuPopup={handleMenuPopupClick}
-                />
-                <ProtectedRoute
-                  component={Movies}
-                    loggedIn={loggedIn}
-                    initialMovies={initialMovies}
-                    onSave={handleSaveMovie}
-                    onDelete={handleDeleteMovie}
-                    savedMovies={savedMovies}
-                />
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  component={Footer}
-                />
-              </>
-            }
-          />
-          <Route path='/saved-movies'
-            element={
-              <>
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  component={Header}
-                  headerClass={'header'}
-                  onMenuPopup={handleMenuPopupClick}
-                />
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  component={SavedMovies}
-                    initialMovies={savedMovies}
-                    onSave={handleSaveMovie}
-                    onDelete={handleDeleteMovie}
-                    savedMovies={savedMovies}
-                />
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  component={Footer}
-                />
-              </>
-            }
-          />
+          <Route path="/movies" element={
+            <>
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Header}
+                headerClass={'header'}
+                onMenuPopup={handleMenuPopupClick}
+              />
+              <ProtectedRoute element={Movies} loggedIn={loggedIn} />
+              <ProtectedRoute element={Footer} loggedIn={loggedIn} />
+            </>
+          } />
+          <Route path="/saved-movies" element={
+            <>
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Header}
+                headerClass={'header'}
+                onMenuPopup={handleMenuPopupClick}
+              />
+              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+              <ProtectedRoute element={Footer} loggedIn={loggedIn} />
+            </>
+          } />
           <Route path='/profile'
             element={
               <>
                 <ProtectedRoute
                   loggedIn={loggedIn}
-                  component={Header}
-                    headerClass={'header'}
-                    onMenuPopup={handleMenuPopupClick}
+                  element={Header}
+                  headerClass={'header'}
+                  onMenuPopup={handleMenuPopupClick}
                 />
                 <ProtectedRoute
                   loggedIn={loggedIn}
-                  component={Profile}
-                    onUpdateUserInfo={handleUpdateUser}
-                    signOut={handleSignOut}
-                    isLoading={isLoading}
-                    errorMessage={errorMessage}
+                  element={Profile}
+                  onUpdateUserInfo={handleUpdateUser}
+                  signOut={handleSignOut}
+                  isLoading={isLoading}
+                  errorMessage={errorMessage}
                 />
               </>
             }
           />
 
-          { !loggedIn ? (
+          {!loggedIn ? (
             <Route path='/signup'
               element={
                 <Register
@@ -319,15 +256,15 @@ function App() {
                   errorMessage={errorMessage}
                 />
               }
-            /> ) : (
+            />) : (
             <Route path='/signup'
               element={
-                <Navigate to="/"/>
+                <Navigate to="/" />
               }
             />
           )}
 
-          { !loggedIn ? (
+          {!loggedIn ? (
             <Route path='/signin'
               element={
                 <Login
@@ -336,7 +273,7 @@ function App() {
                   errorMessage={errorMessage}
                 />
               }
-          /> ) : (
+            />) : (
             <Route path='/signin'
               element={
                 <Navigate to="/" />
@@ -346,7 +283,7 @@ function App() {
 
           <Route path='*'
             element={
-              <PageNotFound/>
+              <PageNotFound />
             }
           />
         </Routes>

@@ -1,46 +1,46 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import useValidation from '../../utils/Validation';
+import React, { useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-// import Preloader from '../Preloader/Preloader';
 
-function SearchForm({ isLoading, handleSearch, handleCheckboxClick, searchRequest, checkboxState }) {
-  const { values, errors, handleChange, resetValidation, isValid } = useValidation();
-  const { movietitle } = values;
+function SearchForm({ searchQuery, setSearchQuery, handleSearch, shortFilm, handleCheckBox }) {
 
-  useEffect(() => {
-    resetValidation({ movietitle: searchRequest });
-  }, [searchRequest]);
+  const [inputError, setInputError] = useState('');
 
-  function handleSearchFormClick(evt) {
-    evt.preventDefault();
-    handleSearch(movietitle);
+  function handleChange(evt) {
+    setSearchQuery(evt.target.value);
   }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (searchQuery === '') {
+      setInputError('Нужно ввести ключевое слово');
+    } else {
+      handleSearch();
+      setInputError('');
+    }
+  }
+
   return (
     <section className="searchform" aria-label="Форма поиска фильма">
-      {/* {isLoading ? <Preloader /> : ''} */}
-      <form className="searchform__form" onSubmit={handleSearchFormClick} noValidate>
-        <label className="searchform__input-block">
+      <form className="searchform__form" onSubmit={handleSubmit} noValidate>
+        <div className="searchform__input-block">
           <input
             className="searchform__input"
             type="text"
             name="movietitle"
             placeholder="Фильм"
-            value={values.movietitle || ''}
+            value={searchQuery}
             onChange={handleChange}
             required
             minLength="1"
           />
-          <span className={`searchform__input-error ${!isValid && errors.movietitle ? 'searchform__input-error_active' : ''}`}
-            id="movietitle-error">{errors.movietitle || ''}</span>
+
           <button
-            className={`searchform__button ${!isValid && errors ? 'searchform__button_disabled' : ''}`}
+            className={`searchform__button ${inputError ? 'searchform__button_disabled' : ''}`}
             type="submit"
-            disabled={!isValid}
           />
-          <span className="searchform__input-error"></span>
-        </label>
-        <FilterCheckbox onClick={handleCheckboxClick} checkboxState={checkboxState} />
+        </div>
+        <span className={`search-form__submit-error ${inputError ? 'search-form__submit-error_active' : ''}`}>{inputError}</span>
+        <FilterCheckbox shortFilm={shortFilm} handleCheckBox={handleCheckBox} />
       </form>
     </section>
   );
