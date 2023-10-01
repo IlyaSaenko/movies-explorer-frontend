@@ -2,9 +2,10 @@
   padding-top: 32px;
   padding-bottom: 36px;
   display: flex;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
+  align-self: flex-start;
   cursor: pointer;
-  background-color: rgba(32, 32, 32, 1);
+  background-color: transparent;
 }
 
 .checkbox__switch {
@@ -69,6 +70,7 @@
     padding-bottom: 68px;
     justify-content: flex-start;
     flex-direction: row-reverse;
+    align-self: flex-end;
   }
 
   .checkbox__text {

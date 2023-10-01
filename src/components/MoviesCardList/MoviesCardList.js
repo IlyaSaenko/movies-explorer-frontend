@@ -1,31 +1,29 @@
 import React from 'react';
+import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({movies, isOwner}) {
-
+export default function MoviesCardList({ movies, savesMovies, setSavesMovies, handleDeleteMovie, isLoading, searchError }) {
   return (
-    <>
-      <ul className="movies__section" aria-label="Секция с карточками">
-        {
-          movies?.map((movie) => {
-            return (
+    <section className='movies-container'>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <>
+          <ul className='movies-container__list'>
+            {movies.map((movie) => (
               <MoviesCard
+                key={movie.id || movie._id}
                 movie={movie}
-                key={movie.id}
+                savesMovies={savesMovies}
+                setSavesMovies={setSavesMovies}
+                onDeleteMovie={handleDeleteMovie}
               />
-            )
-          }
-        )}
-      </ul>
-      {
-        (!isOwner &&
-          <section className="movies__section-more" aria-label="Кнопка Ещё">
-             <button className="movies__more-button" type="button">Ещё</button>
-          </section>
-        )
-      }
-    </>
+            ))}
+          </ul>
+          <span className='movies-container__error'>{searchError}</span>
+        </>
+      )}
+    </section>
   );
 }
-
-export default MoviesCardList;

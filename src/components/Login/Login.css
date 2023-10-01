@@ -18,12 +18,12 @@
 }
 
 .login__input-error {
-  /* font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 10px;
   line-height: 12px;
   font-style: normal;
   font-weight: 400;
-  color: #FF4062; */
+  color: #FF4062;
   display: none;
 }
 
