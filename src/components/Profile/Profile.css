@@ -94,17 +94,14 @@
   font-weight: 400;
   transition: opacity 0.35s linear;
   cursor: pointer;
-  /* background-color: rgba(66, 133, 244, 1); */
   color: #ffffff;
 }
 
 .profile__edit-button[disabled] {
   color: #919191;
-  /* opacity: 0.3; */
 }
 
 .profile__edit-button[disabled]:hover {
-  /* opacity: 0.1; */
   cursor: default;
 }
 
@@ -115,8 +112,6 @@
 .profile__edit-button_disabled {
   color: #919191;
   pointer-events: none;
-  /* background-color: #ffffff; */
-  /* color: #ffffff; */
 }
 
 .profile__signout-button {

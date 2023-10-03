@@ -50,7 +50,6 @@ class UserAuth {
 }
 
 const userAuth = new UserAuth({
-  // BASE_URL: 'http://localhost:3000',
   BASE_URL: 'https://movies.diplom.api.nomoredomainsicu.ru',
   headers: {
     'Content-Type': 'application/json'

@@ -1,15 +1,6 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react-hooks/exhaustive-deps */
-
-// Сергей, добрый день!
-// Спасибо большое за проверку и полезные замечания!
-// Из последних 24 часов спал 4, остальное время полностью ушло на полный рефакторинг movies.
-// Изначально не выходило сделать, не находил никак, в чём проблема. Обращался в чаты.
-// В общем, решил заново поэтапно написать.
-// Надеюсь, получилось, ибо у меня сегодня последний день сдачи.
-// Ещё раз спасибо за проверку!
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import Header from '../Header/Header';

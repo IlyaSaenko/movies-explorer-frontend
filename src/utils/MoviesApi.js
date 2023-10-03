@@ -16,7 +16,7 @@ class MoviesApi {
   getBeatMovies() {
     return this._request('/beatfilm-movies', {
       method: 'GET',
-      headers: this._headers,
+      headers: this._headers
     });
   }
 }
@@ -24,41 +24,6 @@ class MoviesApi {
 export const moviesApi = new MoviesApi({
   baseUrl: 'https://api.nomoreparties.co',
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   },
 });
-
-
-
-
-// class MoviesApi {
-//   constructor(config) {
-//     this._url = config.baseUrl;
-//     this._headers = config._headers;
-//   }
-
-//   _getResponseData(response) {
-//     if (response.ok) {
-//       return response.json();
-//     }
-//     return Promise.reject(`Ошибка: ${response.status}`);
-//   }
-
-//   getAllMovies() {
-//     return fetch(`${this._url}`, {
-//       method: 'GET',
-//       headers: this._headers
-//     })
-//       .then(this._getResponseData);
-//   }
-// }
-
-// const moviesApi = new MoviesApi({
-//   baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-//   }
-// });
-
-// export default moviesApi;
